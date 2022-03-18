@@ -1,19 +1,21 @@
-<?php 
+<?php
+session_start();
 $name = $_POST["name"];
 $login = $_POST["email"];
 $pass = $_POST["password"];
 
-// echo $name."<br>";
-// echo $email."<br>";
-// echo $pass;
+$_SESSION["name"] = $name;
+$_SESSION["email"] = $email;
 
-$pass = md5($pass."thisAmIsGone"); 
+
+$pass = md5($pass . "thisAmIsGone");
+
 
 $mysql = new mysqli('localhost', 'root', '', 'devChat');
 
 $result1 = $mysql->query("SELECT * FROM `users` WHERE `login` = '$login'");
 $user1 = $result1->fetch_assoc(); // Конвертируем в массив
-if(!empty($user1)){
+if (!empty($user1)) {
 	echo "Данный логин уже используется!";
 	exit();
 }
@@ -24,4 +26,3 @@ $mysql->close();
 
 
 header("Location: http://localhost:3000/");
-?>
