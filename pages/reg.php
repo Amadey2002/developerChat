@@ -5,7 +5,9 @@ $login = $_POST["email"];
 $pass = $_POST["password"];
 
 $_SESSION["name"] = $name;
-$_SESSION["email"] = $email;
+$_SESSION["email"] = $login;
+
+setcookie("name", 'JUEHTW');
 
 
 $pass = md5($pass . "thisAmIsGone");
@@ -24,5 +26,8 @@ $mysql->query("INSERT INTO `users` (`login`, `pass`, `name`)
 	VALUES('$login', '$pass', '$name')");
 $mysql->close();
 
-
+echo $_SESSION["name"]."<br>";
+echo $_SESSION["email"];
 header("Location: http://localhost:3000/");
+
+

@@ -20,16 +20,16 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="http://localhost/pages/myAccount.html">My account</a>
+            <a class="nav-link" aria-current="page" href="http://localhost/pages/myAccount.php">My account</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="http://localhost/pages/people.html">People</a>
+            <a class="nav-link" aria-current="page" href="http://localhost/pages/people.php">People</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active disabled" href="#">General</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost/pages/private.html" tabindex="-1"
+            <a class="nav-link" href="http://localhost/pages/private.php" tabindex="-1"
               aria-disabled="true">Private</a>
           </li>
         </ul>
@@ -42,10 +42,10 @@
     <div class="container fixed-bottom">
 
       <div class="row">
-        <div class="col-md-3">
-          <input id="name" type="text" class="form-control" placeholder="Введите имя">
+        <div class="col-md-2">
+          <input id="name" type="text" class="form-control" placeholder="Введите Имя">
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
           <input id="message" type="text" class="form-control" placeholder="Введите ообщшние">
         </div>
         <div class="col-md-2">
@@ -65,13 +65,14 @@
 
 
   <script>
-    "<?session_start();?>"
-    console.log(localStorage.getItem('name'))
-    var per = '<?=$name?>'
+
+  
     $(function () {
       var socket = io.connect('');
 
       var $name = $("#name");
+      // var name = "<?php $_SESSION['NAME']?>";
+      // console.log(name);
       var $form = $("#messForm");
       var $textarea = $("#message");
       var $all_message = $("#all_mess");
@@ -79,7 +80,7 @@
       $form.submit(function (event) {
         event.preventDefault();
         socket.emit('send mess', { mess: $textarea.val(), name: $name.val() });
-        console.log($textarea.val());
+        // console.log($textarea.val());
         $textarea.val('');
       });
 
@@ -89,8 +90,6 @@
       })
     })
 
-
   </script>
 </body>
-
 </html>
