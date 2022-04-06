@@ -37,6 +37,7 @@
 
   <main class="container">
     <img src="Zombi.jpg" alt="" class="rounded-circle">
+
     <?php
     session_start();
 
@@ -49,8 +50,9 @@
     echo "<p>Имя: " . $_SESSION["name"] . "</p>";
     echo "<p>Почта: " . $_SESSION["email"] . "</p>";
     ?>
+
     <form action="photo.php" method="post">
-      <input type="file" class='btn btn-dark'>
+      <input type="file" name="avatar" class='btn btn-dark'>
       <input type="submit">
     </form>
   </main>

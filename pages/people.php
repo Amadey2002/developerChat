@@ -39,50 +39,45 @@
     <div class="container">
       <?php
       session_start();
-        $mysql = new mysqli('localhost', 'root', '', 'devChat');
-        $sql = "SELECT * FROM users";
+      $mysql = new mysqli('localhost', 'root', '', 'devChat');
+      $sql = "SELECT * FROM users";
 
-        $admin = $_SESSION['admin'];
-      
-        if($result = mysqli_query($mysql, $sql)){
-          $rowsCount = mysqli_num_rows($result);
-          echo "<form action='checkbox-form.php' method='post'>";
-          foreach($result as $row){
-            echo "<p>".$row["name"]." <input type='checkbox' name='nameUser[]'>"."</p>";
-          }
-        }else{
-          echo "Что-то не так";
+      $admin = $_SESSION['admin'];
+
+      if ($result = mysqli_query($mysql, $sql)) {
+        $rowsCount = mysqli_num_rows($result);
+        echo "<form action='checkbox-form.php' method='post'>";
+        foreach ($result as $row) {
+          echo "<p>" . $row["name"] . " <input type='checkbox' name='nameUser[]' value='" . $row['name'] . "'>" . "</p>";
         }
-        echo "<input type='submit' name='formSubmit' value='Submit' />";
-        echo "</form>";
-        echo "<br>Всего людей: ".$rowsCount;
+      } else {
+        echo "Что-то не так";
+      }
+      // echo "";
+      // echo "</form>";
+      echo "<br>Всего людей: " . $rowsCount;
       ?>
       <div id="selectedPeople"></div>
       <br>
-      <input type="button" value="Добавить в закрытый чат" class="btn btn-dark">
-      <input type="button" id="select" value="Выбрать всех" class="btn btn-dark" onclick="selectPeople()">
-      <input type="button" id="selectNo" value="Снять выбор" class="btn btn-dark" disabled onclick="selectPeopleNo()">
+      <div class=" row justify-content-center fixed-bottom">
+        <input type="button" value="Добавить в закрытый чат" class="btn btn-dark col-3">
+        <input type="button" id="select" value="Выбрать всех" class="btn btn-dark col-3" onclick="selectPeople()">
+        <input type="button" id="selectNo" value="Снять выбор" class="btn btn-dark col-3" disabled onclick="selectPeopleNo()">
+        <!-- <input type="submit" id="Ban" value="Заблокировать пользователя" class="btn btn-dark""> -->
 
-      <?php
-        if($admin){
-            echo " <input type='button' value='Удалить пользователя' class='btn btn-dark'>";
-          }
-        
-      ?>
+        <?php
+        if ($admin) {
+          echo " <input type='submit' value='Заблокировать пользователя' class='btn btn-dark col-3'>";
+          // echo ""
+        }
 
-    <script src="script.js"></script>
-    <script>
-      const mysql = require("mysql2");
-  
-    const connection = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-     database: "usersdb",
-     password: "пароль_от_сервера"
-  });
-    </script>
+        ?>
+      </div>
+      </form>
+      <script src="script.js"></script>
+
     </div>
-    
+
   </main>
 
 </body>

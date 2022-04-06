@@ -18,7 +18,7 @@ $mysql = new mysqli('localhost', 'root', '', 'devChat');
 $result1 = $mysql->query("SELECT * FROM `users` WHERE `login` = '$login'");
 $user1 = $result1->fetch_assoc(); // Конвертируем в массив
 if (!empty($user1)) {
-	echo "Данный логин уже используется!";
+	header('Location: regNo.html');
 	exit();
 }
 
@@ -28,6 +28,6 @@ $mysql->close();
 
 echo $_SESSION["name"]."<br>";
 echo $_SESSION["email"];
-header("Location: http://localhost:3000/");
+header("Location: myAccount.php");
 
 
